@@ -67,7 +67,7 @@ const Home = () => {
       />
       <WrapperStyle>
         <ButtonStyle onClick={handleStart}>Start</ButtonStyle>
-        <InputStyle onChange={handleInputChange} />
+        <InputStyle placeholder="use ',' between sequences e.g 2,4,6,8,3,2  " onChange={handleInputChange} />
         <ButtonStyle onClick={handleSubmit}>Submit</ButtonStyle>
       </WrapperStyle>
     </HomeStyle>
