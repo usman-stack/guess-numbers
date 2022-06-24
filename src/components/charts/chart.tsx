@@ -13,7 +13,7 @@ const Chart = (props: any) => {
     // to delay random highlighting of slices
     const myInterval = setInterval(handleRandom, intervalTime);
     function handleRandom() {
-      // stop execution if Reset button is click
+    
       if (isStart) {
         if (counter >= 12) {
           discardInterval();
@@ -40,6 +40,7 @@ const Chart = (props: any) => {
               return {
                 ...item,
                 isActive: false,
+
               };
             }
           });
