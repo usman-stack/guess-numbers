@@ -1,35 +1,32 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SliceStyle, CircleStyle } from "./charts.style";
-import { PieChart } from "react-minimal-pie-chart";
 import { data } from "../../utils";
-import { count } from "console";
-interface Random {
-  id: number;
-  color: string;
-  rotate: string;
-  isHighLighted: boolean;
-}
+
 const Chart = (props: any) => {
-  const { isStart, genratedSequence, setGenratedSequence } = props;
+  const { isStart, isReset, setGenratedSequence, setStart, isStop } = props;
   const [currentData, setCurrentData] = useState<any>(data);
   let counter = 0;
   let newData = new Array();
   let sequence = new Array();
-
+  let intervalTime = 5000 / 12;
   useEffect(() => {
-    const handleRandom = () => {
+    // to delay random highlighting of slices
+    const myInterval = setInterval(handleRandom, intervalTime);
+    function handleRandom() {
+      // stop execution if Reset button is click
       if (isStart) {
         if (counter >= 12) {
+          discardInterval();
           setGenratedSequence(sequence);
           setCurrentData([...currentData, (currentData[11].isActive = false)]);
+          setStart(false);
           return;
         } else {
           let random = Math.floor(Math.random() * 12);
-          let available = sequence.includes(random)
-          if(available) {
+          let available = sequence.includes(random);
+          if (available) {
             random = Math.floor(Math.random() * 12);
           }
-          console.log(random)
           let obj = currentData[random];
           obj = {
             ...obj,
@@ -47,13 +44,18 @@ const Chart = (props: any) => {
             }
           });
           sequence.push(random);
+          console.log(sequence);
         }
         counter++;
         setCurrentData(newData);
       }
-    };
-    const id = setInterval(handleRandom, 5000 / 12);
-  }, [!isStart]);
+    }
+
+    function discardInterval() {
+      clearInterval(myInterval);
+    }
+  }, [isStart]);
+
   return (
     <CircleStyle>
       {currentData?.map((item: any) => {

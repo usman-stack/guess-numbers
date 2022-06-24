@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PieChart } from "react-minimal-pie-chart";
+
 
 type ChartProps = {
   color: string;
@@ -20,6 +20,7 @@ const SliceStyle = styled.div<ChartProps>`
   height: 50%;
   transform-origin: 0% 100%;
   background-color: ${(props) => props.isActive ? "#C70A80" : props.color};
+  transition: background-color 0.5s ease;
   display: flex;
   align-items: center;
   top: 0;
@@ -30,7 +31,7 @@ const SliceStyle = styled.div<ChartProps>`
     padding-left: 50px;
     color: white;
     font-size: 18px;
-    animation: mymove 4s ease-in;
+    animation: mymove 1s ease-in;
   }
   @keyframes mymove {
     50% {
