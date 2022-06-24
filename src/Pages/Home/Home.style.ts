@@ -8,7 +8,7 @@ const HomeStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   grid-gap: 40px;
 `;
 const ButtonStyle = styled.button`

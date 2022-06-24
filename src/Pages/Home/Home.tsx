@@ -14,15 +14,21 @@ const Home = () => {
   const [isPass, setIsPass] = useState<boolean>(true);
   const [isBannerVisible, setIsBannerVisible] = useState<boolean>(false);
   const [genratedSequence, setGenratedSequence] = useState<any>([]);
+
   let newArr = new Array();
 
   const handleStart = () => {
     setStart(true);
   };
+
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
   };
+
   const handleSubmit = () => {
+    // check user input is sequence is correct
+    // or not by matching genrated sequence
+
     if (!inputValue || genratedSequence.length == 0)
       alert("Please Play Game and add Sequence first");
     else {
@@ -30,7 +36,7 @@ const Home = () => {
       for (let i = 0; i < text.length; i++) {
         newArr.push(parseInt(text[i]));
       }
-      console.log('newArr',newArr,genratedSequence)
+      console.log("newArr", newArr, genratedSequence);
       if (newArr.length !== genratedSequence.length) {
         setIsPass(false);
       } else {
@@ -43,8 +49,6 @@ const Home = () => {
         }
       }
       setIsBannerVisible(true);
-      setGenratedSequence([]);
-      newArr = [];
     }
   };
 
@@ -57,9 +61,9 @@ const Home = () => {
       ) : null}
       <Chart
         isStart={isStart}
+        setStart={setStart}
         genratedSequence={genratedSequence}
         setGenratedSequence={setGenratedSequence}
-        
       />
       <WrapperStyle>
         <ButtonStyle onClick={handleStart}>Start</ButtonStyle>
